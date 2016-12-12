@@ -60,6 +60,9 @@ func main(){
 
 	//send tx.
 	txhash, err = blk.SendTX(tx)
+
+	//set cache.
+	Spent(tx)
 }
 ```
 

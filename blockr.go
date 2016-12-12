@@ -75,15 +75,17 @@ type Unspent struct {
 
 var cacheUTXO = make(map[string][]Unspent)
 
-//Spent sets the cache that tx hash is already spent.
-func Spent(hash []byte) {
-	h := hex.EncodeToString(hash)
-	for k, v := range cacheUTXO {
-		for i, utxo := range v {
-			if h == utxo.Tx {
-				v = append(v[0:i], v[i+1:]...)
-				cacheUTXO[k] = v
-				return
+//spent sets the cache that tx hash is already spent.
+func spent(tra *tx.Tx) {
+	for _, txin := range tra.TxIn {
+		hh := tx.Reverse(txin.Hash)
+		h := hex.EncodeToString(hh)
+		for k, v := range cacheUTXO {
+			for i, utxo := range v {
+				if h == utxo.Tx {
+					cacheUTXO[k] = append(v[0:i], v[i+1:]...)
+					continue
+				}
 			}
 		}
 	}
@@ -121,8 +123,8 @@ func (b *Service) SendTX(tra *tx.Tx) ([]byte, error) {
 	}
 	if u.Status != "success" {
 		return nil, errors.New("blockr returns: " + u.Message)
-
 	}
+	spent(tra)
 	return hex.DecodeString(u.Data)
 }
 
