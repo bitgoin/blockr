@@ -26,8 +26,6 @@ This requires
 ## Example
 (This example omits error handlings for simplicity.)
 
-## Key Handling
-
 ```go
 
 import "github.com/bitgoin/blockr"
