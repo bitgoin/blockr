@@ -133,7 +133,7 @@ func TestMicro(t *testing.T) {
 		t.Error(err)
 	}
 
-	if _, err := blk.SendTX(bond); err != nil {
+	if _, err = blk.SendTX(bond); err != nil {
 		t.Error(err)
 	}
 
@@ -147,7 +147,7 @@ func TestMicro(t *testing.T) {
 		t.Error(err)
 	}
 
-	if _, err := blk.SendTX(tx); err != nil {
+	if _, err = blk.SendTX(tx); err != nil {
 		t.Error(err)
 	}
 	bbond, err := bond.Pack()
