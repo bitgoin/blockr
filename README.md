@@ -46,15 +46,11 @@ func main(){
     //prepare send info.
 	send := []*tx.Send{
 		&tx.Send{
-			Addr:   "n3Bp1hbgtmwDtjQTpa6BnPPCA8fTymsiZy",
-			Amount: 0.05 * tx.Unit,
-		},
-		&tx.Send{
 			Addr:   "n2eMqTT929pb1RDNuqEnxdaLau1rxy3efi",
 			Amount: 0.01 * tx.Unit,
 		},
 		&tx.Send{
-			Addr:   adr,
+			Addr:   txKey.Publickey.Address(),
 			Amount: 0,
 		},
 	}
